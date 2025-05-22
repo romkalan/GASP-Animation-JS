@@ -59,21 +59,61 @@ imagesArray.forEach((img, index) => {
     })
 });
 
-counterSixArray.forEach((circleNumber, index) => {
-    let fromX = index * 100 + 100;
-    gsap.from(circleNumber, {
-        scrollTrigger: {
-            trigger: circleNumber,
-            start: "top 90%",
-            toggleActions: "play none none none",
-            markers: false,
-        },
-        x: fromX,
+// counterSixArray.forEach((circleNumber, index) => {
+//     let fromX = index * 100 + 100;
+//     gsap.from(circleNumber, {
+//         scrollTrigger: {
+//             trigger: circleNumber,
+//             start: "top 90%",
+//             toggleActions: "play none none none",
+//             markers: false,
+//         },
+//         x: fromX,
+//         opacity: 0,
+//         scale: 0.7,
+//         duration: 1.2,
+//         delay: index * 0.3,
+//         ease: "power1.out",
+//     })
+// });
+
+let counterTimeline = gsap.timeline({
+    scrollTrigger: {
+        trigger: ".counter-six-wrapper",
+        start: "top 90%",
+        toggleActions: "play none none none",
+        markers: false,
+    }
+});
+
+// counterTimeline
+//     .from(".fade-anim:nth-child(1)", {
+//         y: 50,
+//         opacity: 0,
+//         duration: 0.5,
+//     })
+//     .from(".fade-anim:nth-child(2)", {
+//         y: 50,
+//         opacity: 0,
+//         duration: 0.5,
+//     })
+//     .from(".fade-anim:nth-child(3)", {
+//         y: 50,
+//         opacity: 0,
+//         duration: 0.5,
+//     })
+//     .from(".fade-anim:nth-child(4)", {
+//         y: 50,
+//         opacity: 0,
+//         duration: 0.5,
+//     });
+
+counterSixArray.forEach((element, index) => {
+    counterTimeline.from(element, {
+        y: 50,
         opacity: 0,
-        scale: 0.7,
-        duration: index * 0.4,
-        ease: "power1.out",
-    })
+        duration: 0.5
+    }, index * 0.2);
 });
 
 ScrollTrigger.matchMedia({
