@@ -1018,7 +1018,7 @@ i[class^=flaticon-] {
 }
 
 /*----------------------------------------
-    Body background 
+    Body background
 -----------------------------------------*/
 .bg-white {
   background: var(--bd-white);
@@ -2402,7 +2402,7 @@ i[class^=flaticon-] {
 }
 
 /*---------------------------------
-   1.4 Typography css start 
+   1.4 Typography css start
 ---------------------------------*/
 * {
   margin: 0;
@@ -19324,8 +19324,8 @@ h6 {
 .work-btn a .icon {
   height: 45px;
   width: 45px;
-  background-color: var(--bd-primary);
-  border-radius: 50%;
+  /*background-color: var(--bd-primary);*/
+  /*border-radius: 50%;*/
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -19341,6 +19341,10 @@ h6 {
 .work-btn a i {
   transition: 0.3s;
   transform: rotate(-45deg);
+}
+
+#morph-icon {
+  position: absolute;
 }
 
 .featured-blog-wrapper {
