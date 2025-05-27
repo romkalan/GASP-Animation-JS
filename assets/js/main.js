@@ -1,4 +1,10 @@
-gsap.registerPlugin(ScrambleTextPlugin, ScrollTrigger, ScrollSmoother, MorphSVGPlugin, DrawSVGPlugin);
+gsap.registerPlugin(
+    ScrambleTextPlugin,
+    ScrollTrigger,
+    ScrollSmoother,
+    MorphSVGPlugin,
+    DrawSVGPlugin
+);
 
 // gsap.fromTo(".rotate-shape-2",
 //     {rotation: 0},
@@ -174,7 +180,7 @@ ScrollSmoother.create({
 });
 
 gsap.from(".circle-img", {
-    ScrollTrigger: {
+    scrollTrigger: {
         trigger: ".circle-img",
         start: "top 80%",
         end: "bottom 60%",
@@ -189,12 +195,20 @@ gsap.from(".circle-img", {
 
 const articlesArray = gsap.utils.toArray(".blog-post-single");
 
-articlesArray.forEach((article, index) => {
+articlesArray.forEach((article) => {
     const articleTitle = article.querySelector(".blog-six-title");
     const articleOriginalText = article.textContent;
     const avatarName = article.querySelector(".avatar-name");
+    const cursorText = document.querySelector(".cursor-text");
 
     article.addEventListener("mouseenter", () => {
+        cursorText.textContent = "Raed";
+        gsap.to(cursorText, {
+            color: "var(--bd-primary)",
+            duration: 0.3,
+            ease: "power2.out",
+            scale: 1.5,
+        })
         gsap.to(articleTitle, {
             color: "var(--bd-primary)",
             // background: "var(--bd-primary)",
@@ -214,9 +228,10 @@ articlesArray.forEach((article, index) => {
             },
             duration: 1.5,
         });
-    })
+    });
 
     article.addEventListener("mouseleave", () => {
+        cursorText.textContent = "";
         gsap.to(articleTitle, {
             color: "inherit",
             // background: "var(--bd-white)",
@@ -227,7 +242,13 @@ articlesArray.forEach((article, index) => {
             color: "inherit",
             duration: 0.3,
         });
-    })
+        gsap.to(cursorText, {
+            color: "inherit",
+            duration: 0.3,
+            ease: "power2.out",
+            scale: 1,
+        })
+    });
 });
 
 gsap.from(".title-anim > div", {
@@ -280,3 +301,80 @@ gsap.fromTo(".text-slide path",
         repeat: -1,
     },
 );
+
+// Анимация логотипа
+
+const iconPathsArray = gsap.utils.toArray(".icon-path");
+const rectPath = document.getElementById("rectangleIcon");
+const pathsLogoArray = document.querySelectorAll(".icon-path");
+const pathsIconGroup = document.getElementById("pathsIconGroup");
+
+iconPathsArray.forEach(iconPath => {
+    gsap.from(iconPath, {
+        opacity: 0,
+        x: -15,
+        duration: 3,
+    });
+});
+
+gsap.from(rectPath, {
+    opacity: 0,
+    duration: 3,
+});
+
+pathsLogoArray.forEach((path) => {
+    gsap.fromTo(path, {
+            drawSVG: "0%",
+        },
+        {
+            drawSVG: "100%",
+            duration: 1,
+        });
+});
+
+// Анимация логотипа в футере
+
+gsap.from(".footer-logo", {
+    scrollTrigger: {
+        trigger: ".footer-area",
+        start: "top 60%",
+    },
+    opacity: 0,
+    y: 300,
+    ease: "power2.out",
+    duration: 3,
+});
+
+// Работа с курсором
+
+document.addEventListener("mousemove", e => {
+    gsap.to(".custom-cursor", {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.1,
+        ease: "power2.out",
+    });
+});
+
+const hoverTarget = document.querySelectorAll(".hover-target");
+
+hoverTarget.forEach(hoverTargetElement => {
+    hoverTargetElement.addEventListener("mouseenter", () => {
+        gsap.to(".custom-cursor", {
+            scale: 1.3,
+            backgroundColor: "var(--bd-primary)",
+            duration: 0.3,
+            ease: "power2.out",
+        });
+    });
+
+    hoverTargetElement.addEventListener("mouseleave", () => {
+        gsap.to(".custom-cursor", {
+            scale: 1,
+            backgroundColor: "transparent",
+            duration: 0.3,
+            ease: "power2.out",
+        });
+    });
+});
+
