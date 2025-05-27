@@ -21611,3 +21611,17 @@ h6 {
 }
 
 /*# sourceMappingURL=main.css.map */
+
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--bd-black);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
